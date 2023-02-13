@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+"use client";
 import { ThemeProps } from "@/packages/core/theme/themeProvider/themeProvider";
 import { utils } from "@/packages/core/utils/utils";
 import { forwardRef, Fragment, useImperativeHandle, useState } from "react";

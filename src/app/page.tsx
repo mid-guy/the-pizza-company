@@ -2,10 +2,10 @@
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import styles from "./page.module.css";
-import ButtonRoot from "@/packages/UI/Button/ButtonRoot/ButtonRoot";
 import ThemeProvider from "@/packages/core/theme/themeProvider/themeProvider";
 import createTheme from "@/packages/core/theme/createTheme";
 import ButtonBase from "@/packages/UI/button/button-base";
+import ButtonContainedPrimary from "@/packages/UI/button/button-contained/button-contained-primary/ButtonContainedPrimary";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -37,7 +37,7 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <ButtonBase>ButtonBase</ButtonBase>
+        <ButtonContainedPrimary>ButtonContainedPrimary</ButtonContainedPrimary>
         <div className={styles.center}>
           <Image
             className={styles.logo}

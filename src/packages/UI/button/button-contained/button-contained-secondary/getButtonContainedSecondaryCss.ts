@@ -1,21 +1,23 @@
 import { ThemeProps } from "@/packages/core/theme/themeProvider/themeProvider";
+import capitalizeFirstLetter from "@/packages/core/utils/capitalizeFirstLetter";
 import { css, SerializedStyles } from "@emotion/react";
+import { RUI_BUTTON_CONTAINED } from "../getButtonContainedCss";
 
-export const RUI_BUTTON_CONTAINED_PRIMARY = "RuiButtonContainedPrimary";
+export const RUI_BUTTON_CONTAINED_SECONDARY = "RuiButtonContainedSecondary";
 
 const mergeNameTargetComponent = (chain: string): string => {
-  return `${RUI_BUTTON_CONTAINED_PRIMARY}${chain}`;
+  return `${RUI_BUTTON_CONTAINED}${chain}`;
 };
 
-export const generateButtonContainedPrimaryClassNames = (props: {
-  root: boolean;
+export const generateButtonContainedSecondaryClassNames = (props: {
+  background: "secondary";
 }) => {
   const _props: { [key: string]: boolean | string } = props;
   return Object.keys(props)
     .reduce((prevClasses: any, key: any) => {
       if (_props[key]) {
         if (
-          key === "size"
+          key === "background"
         ) {
           return [...prevClasses, classNames[key](_props[key])];
         }
@@ -27,16 +29,22 @@ export const generateButtonContainedPrimaryClassNames = (props: {
 };
 
 const classNames: { [key: string]: string | any } = {
-  root: mergeNameTargetComponent("Root"),
+  background: (value: "secondary"): string =>
+    value &&
+    mergeNameTargetComponent(`Background${capitalizeFirstLetter(value)}`),
 };
 
-const getButtonContainedPrimaryCss = (
+const getButtonContainedSecondaryCss = (
   theme: ThemeProps,
   props: any
 ): SerializedStyles => css`
-  &.${classNames.root} {
-    min-width: 64px;
+  &.${classNames.background(props.background)} {
+    ${theme.components.button.backgrounds[
+      props.background as NonNullable<
+        keyof typeof theme.components.button.backgrounds
+      >
+    ](theme)};
   }
 `;
 
-export default getButtonContainedPrimaryCss;
+export default getButtonContainedSecondaryCss;

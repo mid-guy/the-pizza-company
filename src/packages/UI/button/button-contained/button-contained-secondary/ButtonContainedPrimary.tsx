@@ -10,36 +10,37 @@ import {
   OverridableMapType,
   OverridableStringUnion,
 } from "@/packages/core/types/type";
-import getButtonContainedCss, {
-  generateButtonContainedClassNames,
-  RUI_BUTTON_CONTAINED,
-} from "./getButtonContainedCss";
-import ButtonBase from "../button-base/ButtonBase";
+import {
+  generateButtonContainedSecondaryClassNames,
+  RUI_BUTTON_CONTAINED_SECONDARY,
+} from "./getButtonContainedSecondaryCss";
+import getButtonContainedSecondaryCss from "./getButtonContainedSecondaryCss";
+import ButtonContained from "../ButtonContained";
 
-const ButtonContained = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
-  function (props, ref) {
-    const theme = useTheme() as any;
-    const { children, ...rest } = props;
-    const scopeButtonContainedClasses = generateButtonContainedClassNames({
-      variant: "container",
+const ButtonContainedSecondary = forwardRef<
+  HTMLButtonElement,
+  OverallButtonBaseProps
+>(function (props, ref) {
+  const theme = useTheme() as any;
+  const { children, ...rest } = props;
+  const scopeButtonContainedClasses =
+    generateButtonContainedSecondaryClassNames({
+      background: "secondary",
     });
-    const scopeButtonContainedCSS = getButtonContainedCss(theme, {
-      variant: "container",
-    });
-    return (
-      <ButtonBase
-        scopeButtonBaseClasses={scopeButtonContainedClasses}
-        scopeButtonContainedCSS={scopeButtonContainedCSS}
-        ref={ref}
-        {...rest}
-      >
-        {children}
-      </ButtonBase>
-    );
-  }
-);
+  const scopeButtonContainedCSS = getButtonContainedSecondaryCss(theme, props);
+  return (
+    <ButtonContained
+      scopeButtonBaseClasses={scopeButtonContainedClasses}
+      scopeButtonContainedCSS={scopeButtonContainedCSS}
+      ref={ref}
+      {...rest}
+    >
+      {children}
+    </ButtonContained>
+  );
+});
 
-ButtonContained.defaultProps = {
+ButtonContainedSecondary.defaultProps = {
   size: "sm",
   fullWidth: false,
   disableElevation: false,
@@ -89,6 +90,8 @@ export type ButtonPropsAnimationFrame = OverridableStringUnion<
 >;
 
 export type ButtonBaseProps = {
+  scopeButtonBaseClasses?: string;
+  scopeButtonContainedCSS?: SerializedStyles;
   /**
    * The variant to use.
    * @default container
@@ -157,6 +160,6 @@ export type ButtonBaseProps = {
   outerCSS?: SerializedStyles;
 };
 
-ButtonContained.displayName = RUI_BUTTON_CONTAINED;
+ButtonContainedSecondary.displayName = RUI_BUTTON_CONTAINED_SECONDARY;
 
-export default ButtonContained;
+export default ButtonContainedSecondary;

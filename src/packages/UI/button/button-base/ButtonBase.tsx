@@ -128,6 +128,8 @@ export type ButtonPropsAnimationFrame = OverridableStringUnion<
 >;
 
 export type ButtonBaseProps = {
+  scopeButtonBaseClasses?: string;
+  scopeButtonContainedCSS?: SerializedStyles;
   /**
    * The variant to use.
    * @default container
