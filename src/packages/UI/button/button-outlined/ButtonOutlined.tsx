@@ -5,20 +5,20 @@ import ButtonBase, {
   OverallButtonBaseProps,
 } from "../button-base/ButtonBase";
 
-const BUTTON_CONTAINED = "RuiButtonContained";
+const BUTTON_OUTLINED = "RuiButtonOutlined";
 
-const ButtonContained = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
+const ButtonOutlined = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
   function (props, ref) {
     return (
       <ButtonBase
         ref={ref}
-        nestedClasses={BUTTON_CONTAINED}
+        nestedClasses={BUTTON_OUTLINED}
         {...(props as ButtonBaseProps)}
       />
     );
   }
 );
 
-ButtonContained.displayName = BUTTON_CONTAINED;
+ButtonOutlined.displayName = BUTTON_OUTLINED;
 
-export default ButtonContained;
+export default ButtonOutlined;

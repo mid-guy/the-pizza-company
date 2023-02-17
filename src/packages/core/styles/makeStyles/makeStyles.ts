@@ -1,14 +1,14 @@
-import { ThemeProps, useTheme } from '@core/theme/themeProvider/themeProvider'
+import { useTheme } from '../../theme/themeProvider/themeProvider'
 import { StylesOrCreatorType } from '../../types/type'
 
 const makeStyles = (stylesOrCreator: StylesOrCreatorType) => {
   return (props?: any) => {
     if (props && props instanceof Object)
       return stylesOrCreator({
-        theme: useTheme() as ThemeProps,
+        theme: useTheme() as any,
         ...(props && { props }),
       })
-    return stylesOrCreator(useTheme() as ThemeProps)
+    return stylesOrCreator(useTheme() as any)
   }
 }
 

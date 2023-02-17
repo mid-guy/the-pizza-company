@@ -4,29 +4,30 @@ import withStyles from "@/packages/core/styles/withStyles";
 import { ThemeProps } from "@/packages/core/theme/themeProvider/themeProvider";
 import { css } from "@emotion/react";
 import { forwardRef } from "react";
-import ButtonContained from "../ButtonContained";
+import ButtonOutlined from "../ButtonOutlined";
 
-const BUTTON_OUTLINED_PRIMARY = "RuiButtonOutlinedPrimary";
+const BUTTON_OUTLINED_SECONDARY = "RuiButtonOutlinedSecondary";
+
 const useStyles = (theme: ThemeProps) => css`
-  &.${BUTTON_OUTLINED_PRIMARY} {
+  &.${BUTTON_OUTLINED_SECONDARY} {
     background-color: ${theme.palette.primary.main};
     color: ${theme.palette.primary.contrastText};
   }
 `;
 
-const ButtonOutlinedPrimary = forwardRef<HTMLButtonElement, any>(function (
+const ButtonOutlinedSecondary = forwardRef<HTMLButtonElement, any>(function (
   props,
   ref
 ) {
   return (
-    <ButtonContained
+    <ButtonOutlined
       ref={ref}
-      nestedClasses={BUTTON_OUTLINED_PRIMARY}
+      nestedClasses={BUTTON_OUTLINED_SECONDARY}
       {...(props as any)}
     />
   );
 });
 
-ButtonOutlinedPrimary.displayName = BUTTON_OUTLINED_PRIMARY;
+ButtonOutlinedSecondary.displayName = BUTTON_OUTLINED_SECONDARY;
 
-export default withStyles(useStyles)(ButtonOutlinedPrimary);
+export default withStyles(useStyles)(ButtonOutlinedSecondary);

@@ -5,8 +5,9 @@ import styles from "./page.module.css";
 import ThemeProvider from "@/packages/core/theme/themeProvider/themeProvider";
 import createTheme from "@/packages/core/theme/createTheme";
 import ButtonBase from "@/packages/UI/button/button-base";
+import ButtonContained from "@/packages/UI/button/button-contained/ButtonContained";
 import ButtonContainedPrimary from "@/packages/UI/button/button-contained/button-contained-primary/ButtonContainedPrimary";
-
+import ButtonContainedSecondary from "@/packages/UI/button/button-contained/button-contained-secondary/ButtonContainedSecondary";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -37,7 +38,8 @@ export default function Home() {
             </a>
           </div>
         </div>
-        <ButtonContainedPrimary>ButtonContainedPrimary</ButtonContainedPrimary>
+        <ButtonContainedPrimary>ButtonContained</ButtonContainedPrimary>
+        <ButtonContainedSecondary>ButtonContained</ButtonContainedSecondary>
         <div className={styles.center}>
           <Image
             className={styles.logo}

@@ -14,11 +14,11 @@ import {
 
 export const palette = {
   primary: {
-    main: blue[700],
+    main: '#006a31',
     contrastText: '#FFF',
   },
   secondary: {
-    main: pink['A400'],
+    main: '#d50e15',
     contrastText: '#FFF',
   },
   ternary: {

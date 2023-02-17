@@ -20,7 +20,6 @@ const getTouchRippleCss = (theme: ThemeProps): SerializedStyles => css`
     pointer-events: none;
     > .${animationClasses} {
       position: absolute;
-      background: inherit;
       transform: translate(-50%, -50%);
       animation: onAnimationRipple 1300ms forwards;
       border-radius: 50%;

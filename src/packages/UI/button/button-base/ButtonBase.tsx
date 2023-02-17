@@ -7,10 +7,7 @@ import { ButtonHTMLAttributes, forwardRef, ReactNode, useRef } from "react";
 import { SerializedStyles } from "@emotion/react";
 import ButtonRoot from "../button-root/ButtonRoot";
 import TouchRipple, { TouchRippleRefs } from "../TouchRipple/TouchRipple";
-import {
-  ThemeProps,
-  useTheme,
-} from "@/packages/core/theme/themeProvider/themeProvider";
+import { useTheme } from "@/packages/core/theme/themeProvider/themeProvider";
 import {
   OverridableMapType,
   OverridableStringUnion,
@@ -25,6 +22,8 @@ const ButtonBase = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
       size,
       animationframe,
       disableElevation,
+      nestedClasses,
+      nestedCSS,
       fullWidth,
       outerCSS,
       children,
@@ -37,6 +36,7 @@ const ButtonBase = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
       root: true,
       size: size,
       disableElevation,
+      animationRipple: true,
       fullWidth,
     });
 
@@ -48,7 +48,9 @@ const ButtonBase = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
           touchRippleRef.current?.onCreateAnimation(e);
           onClick && onClick(e);
         }}
-        scopeButtonBaseClasses={scopeButtonBaseClasses}
+        scopeButtonBaseClasses={[nestedClasses, scopeButtonBaseClasses].join(
+          " "
+        )}
         scopeButtonBaseCSS={scopeButtonBaseCSS}
         outerCSS={outerCSS}
         ref={ref as any}
@@ -82,6 +84,7 @@ ButtonBase.defaultProps = {
   size: "sm",
   fullWidth: false,
   disableElevation: false,
+  animationframe: "ripple",
   type: "button",
 };
 
@@ -128,6 +131,8 @@ export type ButtonPropsAnimationFrame = OverridableStringUnion<
 >;
 
 export type ButtonBaseProps = {
+  nestedClasses?: string;
+  nestedCSS?: SerializedStyles;
   scopeButtonBaseClasses?: string;
   scopeButtonContainedCSS?: SerializedStyles;
   /**

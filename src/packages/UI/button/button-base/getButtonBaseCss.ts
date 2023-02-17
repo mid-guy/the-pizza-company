@@ -14,6 +14,7 @@ const mergeNameTargetComponent = (chain: string): string => {
 export const generateButtonBaseClassNames = (props: {
   root: boolean;
   disableElevation?: boolean;
+  animationRipple?: boolean;
   size?: ButtonPropsSize;
   fullWidth?: boolean;
 }) => {
@@ -37,6 +38,7 @@ const classNames: { [key: string]: string | any } = {
   root: mergeNameTargetComponent("Root"),
   fullWidth: mergeNameTargetComponent("FullWidth"),
   disableElevation: mergeNameTargetComponent("DisableElevation"),
+  animationRipple: mergeNameTargetComponent("AnimationRipple"),
   size: (value: ButtonPropsSize): string =>
     value && mergeNameTargetComponent(`Size${value.toUpperCase()}`),
 };
@@ -47,6 +49,10 @@ const getButtonBaseCss = (
 ): SerializedStyles => css`
   &.${classNames.root} {
     min-width: 64px;
+  }
+  &.${classNames.animationRipple} {
+    position: relative;
+    overflow: hidden;
   }
   &.${classNames.size(props.size)} {
     ${theme.components.button.sizes[

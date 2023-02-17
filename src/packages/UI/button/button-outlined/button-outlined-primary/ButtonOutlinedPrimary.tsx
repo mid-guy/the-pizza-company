@@ -4,9 +4,10 @@ import withStyles from "@/packages/core/styles/withStyles";
 import { ThemeProps } from "@/packages/core/theme/themeProvider/themeProvider";
 import { css } from "@emotion/react";
 import { forwardRef } from "react";
-import ButtonContained from "../ButtonContained";
+import ButtonOutlined from "../ButtonOutlined";
 
 const BUTTON_OUTLINED_PRIMARY = "RuiButtonOutlinedPrimary";
+
 const useStyles = (theme: ThemeProps) => css`
   &.${BUTTON_OUTLINED_PRIMARY} {
     background-color: ${theme.palette.primary.main};
@@ -19,7 +20,7 @@ const ButtonOutlinedPrimary = forwardRef<HTMLButtonElement, any>(function (
   ref
 ) {
   return (
-    <ButtonContained
+    <ButtonOutlined
       ref={ref}
       nestedClasses={BUTTON_OUTLINED_PRIMARY}
       {...(props as any)}
