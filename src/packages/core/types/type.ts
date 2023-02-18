@@ -32,4 +32,4 @@ export type OverridableMapType<A, B> = MergeType<Omit<A, keyof B>, B>
 
 export type MergeType<A, B> = A & B
 
-export type StylesOrCreatorType = (theme: ThemeProps) => SerializedStyles
+export type StylesOrCreatorType = (theme: ThemeProps) => string

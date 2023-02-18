@@ -2,31 +2,17 @@
 "use client";
 import withStyles from "@/packages/core/styles/withStyles";
 import { ThemeProps } from "@/packages/core/theme/themeProvider/themeProvider";
-import { css } from "@emotion/react";
-import { forwardRef } from "react";
 import ButtonContained from "../ButtonContained";
 
-const BUTTON_OUTLINED_PRIMARY = "RuiButtonOutlinedPrimary";
-const useStyles = (theme: ThemeProps) => css`
-  &.${BUTTON_OUTLINED_PRIMARY} {
+const BUTTON_CONTAINED_PRIMARY = "RuiButtonContainedPrimary";
+
+const useStyles = (theme: ThemeProps) => `
+  &.${BUTTON_CONTAINED_PRIMARY} {
     background-color: ${theme.palette.primary.main};
     color: ${theme.palette.primary.contrastText};
   }
 `;
 
-const ButtonOutlinedPrimary = forwardRef<HTMLButtonElement, any>(function (
-  props,
-  ref
-) {
-  return (
-    <ButtonContained
-      ref={ref}
-      nestedClasses={BUTTON_OUTLINED_PRIMARY}
-      {...(props as any)}
-    />
-  );
-});
-
-ButtonOutlinedPrimary.displayName = BUTTON_OUTLINED_PRIMARY;
-
-export default withStyles(useStyles)(ButtonOutlinedPrimary);
+export default withStyles(useStyles, {
+  nestedClasses: BUTTON_CONTAINED_PRIMARY,
+})(ButtonContained);

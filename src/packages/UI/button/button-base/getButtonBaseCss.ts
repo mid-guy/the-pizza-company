@@ -1,5 +1,4 @@
 import { ThemeProps } from "@/packages/core/theme/themeProvider/themeProvider";
-import { css, SerializedStyles } from "@emotion/react";
 import {
   ButtonBaseProps,
   ButtonPropsSize,
@@ -34,19 +33,18 @@ export const generateButtonBaseClassNames = (props: {
     .join(" ");
 };
 
-const classNames: { [key: string]: string | any } = {
+const classNames: { [key: string]: string | any  } = {
   root: mergeNameTargetComponent("Root"),
   fullWidth: mergeNameTargetComponent("FullWidth"),
   disableElevation: mergeNameTargetComponent("DisableElevation"),
   animationRipple: mergeNameTargetComponent("AnimationRipple"),
-  size: (value: ButtonPropsSize): string =>
-    value && mergeNameTargetComponent(`Size${value.toUpperCase()}`),
+  size: (value: ButtonPropsSize): string => mergeNameTargetComponent(`Size${value.toUpperCase()}`),
 };
 
 const getButtonBaseCss = (
   theme: ThemeProps,
   props: ButtonBaseProps
-): SerializedStyles => css`
+): string => `
   &.${classNames.root} {
     min-width: 64px;
   }

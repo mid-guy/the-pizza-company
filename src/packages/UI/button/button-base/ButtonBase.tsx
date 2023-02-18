@@ -1,11 +1,9 @@
 "use client";
-/** @jsxImportSource @emotion/react */
 import getButtonBaseCss, {
   generateButtonBaseClassNames,
 } from "./getButtonBaseCss";
-import { ButtonHTMLAttributes, forwardRef, ReactNode, useRef } from "react";
-import { SerializedStyles } from "@emotion/react";
-import ButtonRoot from "../button-root/ButtonRoot";
+import { forwardRef, ReactNode, useRef } from "react";
+import ButtonRoot, { OverallButtonRootProps } from "../button-root/ButtonRoot";
 import TouchRipple, { TouchRippleRefs } from "../TouchRipple/TouchRipple";
 import { useTheme } from "@/packages/core/theme/themeProvider/themeProvider";
 import {
@@ -20,7 +18,6 @@ const ButtonBase = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
     const {
       onClick,
       size,
-      animationframe,
       disableElevation,
       nestedClasses,
       nestedCSS,
@@ -41,27 +38,21 @@ const ButtonBase = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
     });
 
     const scopeButtonBaseCSS = getButtonBaseCss(theme, props);
-
     return (
       <ButtonRoot
         onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
           touchRippleRef.current?.onCreateAnimation(e);
           onClick && onClick(e);
         }}
-        scopeButtonBaseClasses={[nestedClasses, scopeButtonBaseClasses].join(
-          " "
-        )}
-        scopeButtonBaseCSS={scopeButtonBaseCSS}
-        outerCSS={outerCSS}
-        ref={ref as any}
+        nestedClasses={[nestedClasses, scopeButtonBaseClasses].join(" ")}
+        nestedCSS={[scopeButtonBaseCSS, nestedCSS].join(" ")}
+        ref={ref}
         {...rest}
       >
         {startIcon && <StartIcon content={startIcon} />}
         {children}
         {endIcon && <EndIcon content={endIcon} />}
-        {animationframe === "ripple" && (
-          <TouchRipple theme={theme} ref={touchRippleRef} />
-        )}
+        <TouchRipple theme={theme} ref={touchRippleRef} />
       </ButtonRoot>
     );
   }
@@ -70,96 +61,41 @@ export interface IconPropsType {
   content?: ReactNode;
 }
 
-const StartIcon = (props: IconPropsType & { classesStartIcon?: string }) => {
+const StartIcon = (props: IconPropsType & { startIconClasses?: string }) => {
   const { content } = props;
-  return <div className={`cds-button-startIcon`}>{content}</div>;
+  return <div className="RuiButtonStartIcon">{content}</div>;
 };
 
-const EndIcon = (props: IconPropsType & { classesEndIcon?: string }) => {
+const EndIcon = (props: IconPropsType & { endIconClasses?: string }) => {
   const { content } = props;
-  return <div className={`cds-button-endIcon`}>{content}</div>;
+  return <div className="RuiButtonEndIcon">{content}</div>;
 };
 
 ButtonBase.defaultProps = {
   size: "sm",
   fullWidth: false,
   disableElevation: false,
-  animationframe: "ripple",
   type: "button",
 };
 
 export type OverallButtonBaseProps = OverridableMapType<
-  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "size">,
+  OverallButtonRootProps,
   ButtonBaseProps
 >;
 
-export interface ButtonPropsVariantOverrides {}
 export interface ButtonPropsSizeOverrides {}
-export interface ButtonPropsTextColorOverrides {}
-export interface ButtonPropsBackgroundOverrides {}
-export interface ButtonPropsOutlinedThemeOverrides {}
-export interface ButtonPropsAnimationFrameOverrides {}
-
-export type ButtonPropsVariant = OverridableStringUnion<
-  "container" | "text" | "outlined",
-  ButtonPropsVariantOverrides
->;
 
 export type ButtonPropsSize = OverridableStringUnion<
   "sm" | "md" | "lg",
   ButtonPropsSizeOverrides
 >;
 
-export type ButtonPropsTextColor = OverridableStringUnion<
-  "primary" | "secondary" | "ternary",
-  ButtonPropsTextColorOverrides
->;
-
-export type ButtonPropsBackground = OverridableStringUnion<
-  "primary" | "secondary" | "ternary",
-  ButtonPropsBackgroundOverrides
->;
-
-export type ButtonPropsOutlinedTheme = OverridableStringUnion<
-  "primary" | "secondary" | "ternary",
-  ButtonPropsOutlinedThemeOverrides
->;
-
-export type ButtonPropsAnimationFrame = OverridableStringUnion<
-  "ripple" | "scale",
-  ButtonPropsAnimationFrameOverrides
->;
-
 export type ButtonBaseProps = {
-  nestedClasses?: string;
-  nestedCSS?: SerializedStyles;
-  scopeButtonBaseClasses?: string;
-  scopeButtonContainedCSS?: SerializedStyles;
-  /**
-   * The variant to use.
-   * @default container
-   */
-  variant?: ButtonPropsVariant;
   /**
    * The size to use.
    * @default primary
    */
   size?: ButtonPropsSize;
-  /**
-   * the color to use for variant="text"
-   * @default primary
-   */
-  color?: ButtonPropsTextColor;
-  /**
-   * the background to use for variant="container"
-   * @default false
-   */
-  background?: ButtonPropsBackground;
-  /**
-   * The size to use.
-   * @default sm
-   */
-  outlinedTheme?: ButtonPropsOutlinedTheme;
   /**
    * The size to use.
    * @default sm
@@ -176,31 +112,11 @@ export type ButtonBaseProps = {
    */
   endIcon?: ReactNode;
   /**
-   * The disable to disable button.
-   * @default false
-   */
-  disabled?: boolean;
-  /**
-   * The visible to use that component should be visible
-   * @default boolean
-   */
-  isVisible?: boolean;
-  /**
    * The disableElevation to use that component should be
    *  disable box-shadow
    * @default boolean
    */
   disableElevation?: boolean;
-  /**
-   * The animation perform to use when user touch on button.
-   * @default ripple
-   */
-  animationframe?: ButtonPropsAnimationFrame;
-  /**
-   * Children to use
-   * @default {}
-   */
-  outerCSS?: SerializedStyles;
 };
 
 ButtonBase.displayName = "ButtonBase";

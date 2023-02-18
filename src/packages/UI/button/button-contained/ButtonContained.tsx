@@ -1,24 +1,14 @@
 "use client";
-import { forwardRef } from "react";
-import ButtonBase, {
-  ButtonBaseProps,
-  OverallButtonBaseProps,
-} from "../button-base/ButtonBase";
+import withStyles from "@/packages/core/styles/withStyles";
+import { ThemeProps } from "@/packages/core/theme/themeProvider/themeProvider";
+import ButtonBase from "../button-base/ButtonBase";
 
 const BUTTON_CONTAINED = "RuiButtonContained";
 
-const ButtonContained = forwardRef<HTMLButtonElement, OverallButtonBaseProps>(
-  function (props, ref) {
-    return (
-      <ButtonBase
-        ref={ref}
-        nestedClasses={BUTTON_CONTAINED}
-        {...(props as ButtonBaseProps)}
-      />
-    );
-  }
-);
+const useStyles = (theme: ThemeProps) => `
+  &.${BUTTON_CONTAINED} {}
+`;
 
-ButtonContained.displayName = BUTTON_CONTAINED;
-
-export default ButtonContained;
+export default withStyles(useStyles, {
+  nestedClasses: BUTTON_CONTAINED,
+})(ButtonBase);

@@ -9,7 +9,7 @@ export const mergeNameTargetComponent = (chain: string): string => {
   return `${RUI_BUTTON_ROOT}${chain}`;
 };
 
-const getButtonRootCss = (theme: ThemeProps): SerializedStyles => css`
+const getButtonRootCss = (theme: ThemeProps, props: any): SerializedStyles => css`
   &.${RUI_BUTTON_ROOT} {
     display: inline-flex;
     -webkit-box-align: center;
@@ -33,6 +33,8 @@ const getButtonRootCss = (theme: ThemeProps): SerializedStyles => css`
       pointer-events: none;
     }
   }
+  ${props.nestedCSS}
+  ${props.outerCSS}
 `;
 
 const classNames: { [key: string]: string | any } = {
