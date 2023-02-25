@@ -8,7 +8,11 @@ const withStyles = function (
 ) {
   return function <T>(Component: React.ComponentType<T>) {
     const WithStyles = forwardRef(function WithStyles<
-      P extends { children: ReactNode; nestedCSS?: string } & T
+      P extends {
+        children?: ReactNode;
+        nestedCSS?: string;
+        nestedClasses?: string;
+      } & T
     >(props: P, ref: React.Ref<HTMLElement>) {
       if (process.env.NODE_ENV !== "production") {
         if (Component === undefined) {
@@ -22,10 +26,15 @@ const withStyles = function (
       }
       const useStyles = makeStyles(stylesOrCreator);
       const outerCSS = useStyles() as string;
+      const { nestedClasses: nestedClassesPrefixProps, ...restPrefixProps } =
+        prefixProps;
       return (
         <Component
-          {...prefixProps}
+          {...restPrefixProps}
           {...props}
+          nestedClasses={[nestedClassesPrefixProps, props?.nestedClasses].join(
+            " "
+          )}
           nestedCSS={[outerCSS, props?.nestedCSS].join(" ")}
           ref={ref}
         />
