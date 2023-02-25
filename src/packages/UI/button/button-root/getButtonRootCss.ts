@@ -1,7 +1,6 @@
 import { ThemeProps } from "@/packages/core/theme/themeProvider/themeProvider";
 import capitalizeFirstLetter from "@/packages/core/utils/capitalizeFirstLetter";
 import { css, SerializedStyles } from "@emotion/react";
-import { ButtonPropsAnimationFrame, ButtonPropsSize } from "../button-base/ButtonBase";
 
 export const RUI_BUTTON_ROOT = "RuiButtonRoot";
 
@@ -41,7 +40,7 @@ const classNames: { [key: string]: string | any } = {
   root: mergeNameTargetComponent("Root"),
   disabled: mergeNameTargetComponent("Disabled"),
   disableElevation: mergeNameTargetComponent("DisableElevation"),
-  animationframe: (value: ButtonPropsAnimationFrame): string =>
+  animationframe: (value: any): string =>
     mergeNameTargetComponent(`Animationframe${capitalizeFirstLetter(value)}`),
 };
 
